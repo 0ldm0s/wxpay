@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drzk.pay.mapper.ILoggingPaymentOperationDAO">
+
+	<resultMap type="com.drzk.pay.vo.LoggingPaymentOperationVO"
+		id="loggingPaymentOperationMap">
+		<id property="id" column="id" />
+		<result property="url" column="url" />
+		<result property="outTradeNo" column="out_trade_no" />
+		<result property="tradeType" column="trade_type" />
+		<result property="operationType" column="operation_type" />
+		<result property="total_fee" column="total_fee" />
+		<result property="payWay" column="pay_way" />
+		<result property="returnStatus" column="return_status" />
+		<result property="returnMsg" column="return_msg" />
+		<result property="requestIp" column="request_ip" />
+		<result property="requestBody" column="request_body" />
+		<result property="responseBody" column="response_body" />
+		<result property="createdDate" column="created_date" />
+	</resultMap>
+
+	<select id="selectList"
+		parameterType="com.drzk.pay.vo.LoggingPaymentOperationVO"
+		resultMap="loggingPaymentOperationMap">
+		select
+		id, url, out_trade_no, trade_type, total_fee, pay_way, operation_type,
+		return_status, return_msg, request_ip, request_body, response_body, created_date
+		from t_logging_payment_operation
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and id = #{id}
+			</if>
+			<if test="url != null and url != ''">
+				and url = #{url}
+			</if>
+			<if test="outTradeNo != null and outTradeNo != ''">
+				and out_trade_no = #{outTradeNo}
+			</if>
+			<if test="tradeType != null and tradeType != ''">
+				and trade_type = #{tradeType}
+			</if>
+			<if test="operationType != null and operationType != ''">
+				and operation_type = #{operationType}
+			</if>
+			<if test="payWay != null">
+				and pay_way = #{payWay}
+			</if>
+			<if test="returnStatus != null and returnStatus != ''">
+				and return_status = #{returnStatus}
+			</if>
+			<if test="requestIp != null and requestIp != ''">
+				and request_ip = #{requestIp}
+			</if>
+			<if test="startTime != null and startTime != ''">
+				and DATE_FORMAT(created_date, '%Y-%m-%d %H:%T:%s') <![CDATA[>=]]>
+				DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+			</if>
+			<if test="endTime != null and endTime != ''">
+				and DATE_FORMAT(created_date, '%Y-%m-%d %H:%T:%s') <![CDATA[<=]]>
+				DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%T:%s')
+			</if>
+		</where>
+	</select>
+
+	<insert id="save"
+		parameterType="com.drzk.pay.vo.LoggingPaymentOperationVO">
+		insert into t_logging_payment_operation(
+		id, url, out_trade_no, trade_type, total_fee, pay_way, 
+		return_status, return_msg, request_body, operation_type,
+		response_body, created_date
+		)values(
+		uuid(), #{url}, #{outTradeNo}, #{tradeType}, #{totalFee}, #{payWay},
+		#{returnStatus}, #{returnMsg}, #{requestBody}, #{operationType}, 
+		#{responseBody}, now()
+		)
+	</insert>
+
+</mapper>

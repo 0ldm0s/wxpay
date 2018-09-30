@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.drzk.pay</groupId>
+	<artifactId>payment</artifactId>
+	<version>5.0.0</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>dr-park-pay-core</module>
+		<module>dr-park-pay-log</module>
+		<module>dr-park-pay-dto</module>
+		<module>dr-park-pay-i18n</module>
+		<module>dr-park-pay-utils</module>
+		<module>dr-park-pay-service</module>
+	</modules>
+
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<url>http://192.168.8.206:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://192.168.8.206:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
+	<name>dr-park-pay</name>
+	<description>payment project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.3.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<springboot.version>2.0.3.RELEASE</springboot.version>
+		<parking.version>0.0.1-SNAPSHOT</parking.version>
+		<commons-lang.version>2.5</commons-lang.version>
+		<commons-beanutils.version>1.8.3</commons-beanutils.version>
+		<commons.lang3.version>3.1</commons.lang3.version>
+		<parking.version>5.0.0</parking.version>
+		<lombok.version>1.16.10</lombok.version>
+		<jackson.version>2.9.6</jackson.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.drzk.pay</groupId>
+				<artifactId>dr-park-pay-core</artifactId>
+				<version>${parking.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.drzk.pay</groupId>
+				<artifactId>dr-park-pay-dto</artifactId>
+				<version>${parking.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.drzk.pay</groupId>
+				<artifactId>dr-park-pay-i18n</artifactId>
+				<version>${parking.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.drzk.pay</groupId>
+				<artifactId>dr-park-pay-service</artifactId>
+				<version>${parking.version}</version>
+			</dependency>
+			<dependency>
+	            <groupId>com.drzk</groupId>
+	            <artifactId>dr-park-log</artifactId>
+	            <version>${parking.version}</version>
+        	</dependency>
+			<dependency>
+				<groupId>com.drzk.pay</groupId>
+				<artifactId>dr-park-pay-utils</artifactId>
+				<version>${parking.version}</version>
+				
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${springboot.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-redis</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-mongodb</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.39</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.0.20</version>
+				
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-thymeleaf</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-eureka</artifactId>
+				<version>${springboot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.SR5</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- 支付 -->
+			<!-- https://mvnrepository.com/artifact/com.github.wxpay/wxpay-sdk -->
+			<dependency>
+				<groupId>com.github.wxpay</groupId>
+				<artifactId>wxpay-sdk</artifactId>
+				<version>0.0.3</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+			<dependency>
+				<groupId>com.alipay.sdk</groupId>
+				<artifactId>alipay-sdk-java</artifactId>
+				<version>3.3.4.ALL</version>
+			</dependency>
+			<!-- commons -->
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons-lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons.lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.7</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<!--compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!--jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			<!--source -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.drzk.pay.launch.StartUpApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
